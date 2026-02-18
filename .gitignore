@@ -8,7 +8,7 @@ wp-content/backup-db/
 
 # Composer
 vendor/
-composer.lock
+# composer.lock
 
 # Node / Frontend
 node_modules/
