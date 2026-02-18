@@ -23,6 +23,8 @@ class App {
 				\Snappbox\Core\Geo\PolygonValidator::class,
                 \Snappbox\Core\Diagnostics\Logger::class,
                 \Snappbox\Core\Diagnostics\HealthCheck::class,
+                \Snappbox\API\LiveTracking::class    => \DI\create(),
+                // AUTO_APPEND_SERVICES (Reserved for Sentinel)
                 \Snappbox\Core\UI\NoticeManager::class,
                 \Snappbox\WooCommerce\Shipping\PriceCalculator::class,
 				\Snappbox\WooCommerce\ShippingMethod::class,

@@ -420,7 +420,7 @@ class SetupWizard {
 	 */
 	private function snappb_normalize_number( $s ): string {
 		$s = \trim( (string) $s );
-		if ( $s === '' ) {
+		if ( '' === $s ) {
 			return '';
 		}
 		$map = array(

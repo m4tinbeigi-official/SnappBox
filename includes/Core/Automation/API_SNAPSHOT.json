@@ -1,10 +1,12 @@
 {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "endpoints": {
         "pricing": "/v2/pricing",
         "wallet": "/v1/user/profile",
         "create_order": "/v1/order/create",
-        "cancel_order": "/v1/order/cancel"
+        "cancel_order": "/v1/order/cancel",
+        "live_tracking": "/v1/orders/:orderId/current-location",
+        "favorite_addresses": "/v1/customers/favorite-address"
     },
-    "last_sync": "2026-02-18T20:30:00Z"
+    "last_sync": "2026-02-18T20:35:00Z"
 }
