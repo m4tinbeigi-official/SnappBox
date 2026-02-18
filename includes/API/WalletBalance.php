@@ -10,6 +10,11 @@ defined( 'ABSPATH' ) || exit;
  */
 class WalletBalance {
 	public function snappb_check_balance() {
+		$cached = \get_transient( 'snappbox_wallet_balance' );
+		if ( false !== $cached ) {
+			return $cached;
+		}
+
 		$settings_serialized = \get_option( 'woocommerce_snappbox_shipping_method_settings' );
 		$settings            = \maybe_unserialize( $settings_serialized );
 
@@ -43,12 +48,14 @@ class WalletBalance {
 		$status_code = \wp_remote_retrieve_response_code( $response );
 		$body        = \json_decode( \wp_remote_retrieve_body( $response ), true );
 
-		if ( $status_code === 200 && ! empty( $body['data'] ) ) {
-			return array(
+		if ( 200 === $status_code && ! empty( $body['data'] ) ) {
+			$result = array(
 				'success' => true,
 				'balance' => $body['data']['credits'] ?? 0,
 				'name'    => $body['data']['fullname'] ?? '',
 			);
+			\set_transient( 'snappbox_wallet_balance', $result, 10 * MINUTE_IN_SECONDS );
+			return $result;
 		}
 
 		return array(

@@ -10,6 +10,12 @@ defined( 'ABSPATH' ) || exit;
  */
 class Pricing {
 	public function snappb_get_pricing( $data ) {
+		$cache_key = 'snappb_pricing_' . md5( json_encode( $data ) );
+		$cached    = \get_transient( $cache_key );
+		if ( false !== $cached ) {
+			return $cached;
+		}
+
 		$settings_serialized = \get_option( 'woocommerce_snappbox_shipping_method_settings' );
 		$settings            = \maybe_unserialize( $settings_serialized );
 
@@ -45,11 +51,13 @@ class Pricing {
 		$status_code = \wp_remote_retrieve_response_code( $response );
 		$body        = \json_decode( \wp_remote_retrieve_body( $response ), true );
 
-		if ( $status_code === 200 && ! empty( $body['data'] ) ) {
-			return array(
+		if ( 200 === $status_code && ! empty( $body['data'] ) ) {
+			$result = array(
 				'success' => true,
 				'price'   => $body['data']['price'] ?? 0,
 			);
+			\set_transient( $cache_key, $result, 5 * MINUTE_IN_SECONDS );
+			return $result;
 		}
 
 		return array(

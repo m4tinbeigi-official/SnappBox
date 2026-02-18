@@ -152,28 +152,37 @@ class SetupWizard {
 
 				<button
 					type="submit"
+		?>
+			<div class="sbqs-actions">
+				<?php if ( $step > 1 ) : ?>
+					<a class="button button-secondary sbqs-btn"
+						href="<?php echo esc_url( $this->snappb_url_for_step( $step - 1 ) ); ?>">
+						<?php echo esc_html_x( 'Back', 'Button', 'snappbox' ); ?>
+					</a>
+				<?php endif; ?>
+
+				<button
+					type="submit"
 					class="button button-primary sbqs-btn"
 					<?php
 					if ( $step == 2 ) {
 						?>
 						disabled="disabled" <?php } ?>
 					<?php
-					if ( $step == 1 ) {
+					if ( 1 === $step ) {
 						?>
 						onclick="ym(105087875,'reachGoal',' step-1'); setTimeout(() => { this.form.submit(); }, 150); return false;" <?php } ?>
 					<?php
-					if ( $step == 2 ) {
+					if ( 2 === $step ) {
 						?>
 						onclick="ym(105087875,'reachGoal','step-2'); setTimeout(() => { this.form.submit(); }, 150); return false;" <?php } ?>
 					<?php
-					if ( $step == 3 ) {
+					if ( 3 === $step ) {
 						?>
 						onclick="ym(105087875,'reachGoal','step-3'); setTimeout(() => { this.form.submit(); }, 150); return false;" <?php } ?>
 					<?php
 					if ( $is_last ) {
 						?>
-						onclick="ym(105087875,'reachGoal',' step-4'); setTimeout(() => { this.form.submit(); }, 150); return false;" <?php } ?>>
-					<?php echo esc_html( $is_last ? _x( 'Finish', 'Button', 'snappbox' ) : _x( 'Save & Continue', 'Button', 'snappbox' ) ); ?>
 				</button>
 			</div>
 		</form>
@@ -404,11 +413,22 @@ class SetupWizard {
 		$this->snappb_redirect_step( 1 );
 	}
 
+	/**
+	 * Redirect to a specific wizard step.
+	 *
+	 * @param int $n Step number.
+	 */
 	private function snappb_redirect_step( $n ): void {
 		\wp_safe_redirect( $this->snappb_url_for_step( $n ) );
 		exit;
 	}
 
+	/**
+	 * Normalize numbers, handling Persian/Arabic digits.
+	 *
+	 * @param mixed $s Input string.
+	 * @return string Normalized string.
+	 */
 	private function snappb_normalize_number( $s ): string {
 		$s = \trim( (string) $s );
 		if ( $s === '' ) {
@@ -442,6 +462,11 @@ class SetupWizard {
 		return $s;
 	}
 
+	/**
+	 * Get the SnappBox logo SVG markup.
+	 *
+	 * @return string SVG markup.
+	 */
 	private function snappb_get_logo_svg(): string {
 		$base_url = \defined( 'SNAPPBOX_URL' ) ? \trailingslashit( SNAPPBOX_URL ) : '';
 		$src      = $base_url . 'assets/img/sb-log.svg';

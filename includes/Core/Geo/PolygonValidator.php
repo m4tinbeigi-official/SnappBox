@@ -11,30 +11,34 @@ defined('ABSPATH') || exit;
 class PolygonValidator {
 
     /**
-     * Check if a point (lng, lat) is inside a polygon.
+     * Check if a coordinate is within a GeoJSON-style polygon.
      *
-     * @param array $point [longitude, latitude]
-     * @param array $polygon Array of [longitude, latitude] points representing a polygon boundary.
+     * @param float  $lat  Latitude
+     * @param float  $lng  Longitude
+     * @param string $json GeoJSON polygon coordinates (serialized or JSON)
      * @return bool
      */
-    public function is_point_in_polygon(array $point, array $polygon): bool {
-        $x      = (float) ($point[0] ?? 0); // longitude
-        $y      = (float) ($point[1] ?? 0); // latitude
+    public function is_within(float $lat, float $lng, string $json): bool {
+        $polygon = \json_decode($json, true);
+        if (!\is_array($polygon)) {
+            return true; // Default to true if no valid zone is defined
+        }
+
         $inside = false;
         $count  = \count($polygon);
 
         if ($count < 3) {
-            return false;
+            return true;
         }
 
         for ($i = 0, $j = $count - 1; $i < $count; $j = $i++) {
-            $xi = (float) $polygon[$i][0];
-            $yi = (float) $polygon[$i][1];
+            $xi = (float) $polygon[$i][0]; // lng
+            $yi = (float) $polygon[$i][1]; // lat
             $xj = (float) $polygon[$j][0];
             $yj = (float) $polygon[$j][1];
 
-            $intersect = (($yi > $y) !== ($yj > $y))
-                && ($x < ($xj - $xi) * ($y - $yi) / (($yj - $yi) ?: 0.0000001) + $xi);
+            $intersect = (($yi > $lat) !== ($yj > $lat))
+                && ($lng < ($xj - $xi) * ($lat - $yi) / (($yj - $yi) ?: 0.0000001) + $xi);
 
             if ($intersect) {
                 $inside = !$inside;

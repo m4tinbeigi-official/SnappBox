@@ -96,14 +96,18 @@ class OrderAdmin {
 
 	public function handle_get_pricing(): void {
 		\check_ajax_referer( 'snappbox_admin_actions', 'nonce' );
+
+		if ( ! \current_user_can( 'manage_woocommerce' ) ) {
+			\wp_send_json_error( 'Forbidden' );
+		}
+
 		$order_id = \absint( $_POST['order_id'] ?? 0 );
 		if ( ! $order_id ) {
 			\wp_send_json_error( 'Order ID missing' );
 		}
 
 		$pricing_api = new \Snappbox\API\Pricing();
-		// Simplified for brevity, usually you'd get city map etc.
-		$response = $pricing_api->snappb_get_pricing( $order_id, null, '', '', '', \sanitize_text_field( $_POST['voucher_code'] ?? '' ) );
+		$response    = $pricing_api->snappb_get_pricing( $order_id, null, '', '', '', \sanitize_text_field( $_POST['voucher_code'] ?? '' ) );
 		\wp_send_json( $response );
 	}
 }

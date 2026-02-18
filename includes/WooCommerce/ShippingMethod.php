@@ -92,6 +92,18 @@ class ShippingMethod extends \WC_Shipping_Method {
     }
 
     public function calculate_shipping($package = []): void {
+        $lat = (float) ($package['destination']['latitude'] ?? 0);
+        $lng = (float) ($package['destination']['longitude'] ?? 0);
+
+        // Geofencing Check: High Performance
+        if ($lat && $lng) {
+            $coords = $this->get_option('polygon_coords');
+            if (!empty($coords) && !$this->validator->is_within($lat, $lng, $coords)) {
+                $this->logger->log('info', 'Customer is outside the SnappBox delivery zone.');
+                return;
+            }
+        }
+
         $subtotal = (float) (\WC()->cart->get_subtotal() ?? 0);
         $cost = $this->prices->calculate($subtotal, $this->settings);
 
