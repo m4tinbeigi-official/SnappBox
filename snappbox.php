@@ -1,3 +1,13 @@
+<?php
+/**
+ * Plugin Name: SnappBox Elite
+ * Description: The definitive enterprise-grade delivery integration for WooCommerce.
+ * Version: 1.3.1
+ * Author: SnappBox Team
+ * License: GPLv2 or later
+ * Text Domain: snappbox
+ */
+
 declare(strict_types=1);
 
 defined('ABSPATH') || exit;
