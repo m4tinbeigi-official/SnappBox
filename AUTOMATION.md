@@ -1,29 +1,40 @@
-# 🏎️ Elite Automation Suite | مستندات اتوماسیون اِلیت
+# 🏎️ Elite Automation Suite
 
-This document details the total automation ecosystem of the **SnappBox Elite** project.
-این سند جزئیات سیستم اتوماسیون کامل پروژه **SnappBox Elite** را تشریح می‌کند.
+[![Persian](https://img.shields.io/badge/Language-Persian-green.svg?style=for-the-badge)](AUTOMATION-FA.md)
+
+This document details the total automation ecosystem of the **SnappBox Elite** project. Our goal is to eliminate human error and elevate development velocity to elite standards.
 
 ---
 
 ## 🛰️ 1. API Sentinel (Autonomous Evolution)
-**EN**: The Sentinel autonomously monitors the official SnappBox API documentation. If new endpoints or features are detected, it automatically generates the required PHP service code, registers it in the Dependency Injection (DI) container, and triggers a full security and performance audit.
-**FA**: سیستم **Sentinel** به صورت خودکار مستندات رسمی اسنپ‌باکس را پایش می‌کند. در صورت شناسایی قابلیت یا اندپوینت جدید، به صورت خودکار کد PHP مورد نیاز را تولید کرده، آن را در سیستم تزریق وابستگی (DI) ثبت می‌کند و یک بازرسی کامل امنیتی و عملکردی را آغاز می‌نماید.
+The Sentinel autonomously monitors the official SnappBox API documentation (`snapp-box.com/api-doc`) in real-time.
+- **Autonomous Detection**: If new endpoints (e.g., Tracking) are added, the system immediately recognizes the changes.
+- **Automated Code Generation**: The engine generates the required PHP Service classes and implementation logic without manual intervention.
+- **Zero-Touch Integration**: New services are automatically registered in the DI container and made available for immediate use.
 
 ## 🛠️ 2. Autonomous Debugging & Self-Healing
-**EN**: Using the `/debug` command, the engine scans system logs, checks API health (HealthCheck service), and performs deep static analysis (PHPStan). If high-confidence issues are identified, the system automatically applies fixes to ensure 100% stability.
-**FA**: با استفاده از دستور **debug**، موتور هوشمند لاگ‌های سیستم را اسکن کرده، سلامت API را بررسی می‌کند و تحلیل استاتیک عمیق انجام می‌دهد. در صورت شناسایی مشکلات، سیستم به صورت خودکار اصلاحات لازم را اعمال می‌کند تا پایداری ۱۰۰ درصدی تضمین شود.
+Using the `/debug` command, the elite engine performs the following:
+- **Log Scanning**: Analyzes PHP and WooCommerce logs to identify hidden exceptions.
+- **API Health Triggers**: Executes comprehensive connectivity tests via the HealthCheck service.
+- **Static Analysis (PHPStan)**: Verifies code precision at Level 6.
+- **Self-Healing**: If high-confidence issues are identified, the system automatically applies and verifies fixes.
 
 ## 🛡️ 3. Elite Security & Performance Audit
-**EN**: The `/audit` command triggers a project-wide scan for security vulnerabilities (Missing nonces, capability checks, or sanitization). It also analyzes performance bottlenecks, such as missing caches for expensive API calls, and applies optimizations autonomously.
-**FA**: دستور **audit** یک اسکن سراسری برای یافتن حفره‌های امنیتی (مانند عدم چک کردن نانس یا سطح دسترسی) انجام می‌دهد. همچنین گلوگاه‌های عملکردی را شناسایی کرده و برای فراخوانی‌های سنگین API، لایه کشینگ ایجاد می‌کند.
+The `/audit` command is responsible for maintaining the project's premium standards:
+- **Security Guard**: Verifies nonces, capability checks, and data sanitization across all endpoints.
+- **Caching Layer**: Identifies expensive API calls and automatically wraps them in a transient-based caching layer for lightning-fast performance.
+- **Compliance**: Ensures 100% adherence to WordPress Coding Standards (WPCS).
 
 ## 🏗️ 4. Elite Factory (Boilerplate Automation)
-**EN**: The `/factory` and `/add-feature` commands automate the generation of enterprise-grade boilerplate. It creates namespaced PHP services, registers them in the core `App` logic, and synchronously updates the data-driven Admin Panel and Setup Wizard.
-**FA**: دستورات **factory** و **add-feature** فرآیند تولید کد اولیه (Boilerplate) را خودکار می‌کنند. این سیستم کلس‌های مورد نیاز را ساخته، آن‌ها را در هسته برنامه ثبت کرده و به صورت آنی پنل مدیریت و ویزارد را آپدیت می‌کند.
+The `/factory` and `/add-feature` commands are designed for rapid, standardized extension:
+- **Standardized Architecture**: Rapidly generates classes with modern namespacing and PSR-4 structures.
+- **Dynamic UI Registration**: Automatically updates the data-driven Admin Panel and Setup Wizard without the need for manual code modification.
 
 ## 🏎️ 5. Deployment Orchestrator
-**EN**: The `/push` command automates the entire production lifecycle: Modern asset building (Vite), autoload optimization, linting compliance (WPCS), and synchronized version control release.
-**FA**: دستور **push** چرخه کامل انتشار را بر عهده دارد: بیلد کردن فایل‌های فرانت‌اند (Vite)، بهینه‌سازی بارگذاری خودکار، بررسی استانداردهای وردپرس و در نهایت انتشار همزمان در گیت‌هاب.
+The `/push` command automates the entire production lifecycle:
+- **Vite Integration**: High-speed asset building for React and Tailwind CSS v4.
+- **Autoload Optimization**: Optimizes the composer class map for maximum load speed.
+- **Synchronized Release**: Publishes a new production version to GitHub with automated changelogs.
 
 ---
 *Generated by SnappBox Elite Core Automation Suite*

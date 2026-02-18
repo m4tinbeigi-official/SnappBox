@@ -1,5 +1,6 @@
-# 🚚 SnappBox Elite v1.2.0
+# 🚚 SnappBox Elite v1.3.1
 
+[![Persian](https://img.shields.io/badge/Language-Persian-green.svg?style=for-the-badge)](README-FA.md)
 [![WordPress](https://img.shields.io/badge/WordPress-v6.0+-21759b.svg?style=for-the-badge&logo=wordpress)](https://wordpress.org)
 [![WooCommerce](https://img.shields.io/badge/WooCommerce-v8.0+-96588a.svg?style=for-the-badge&logo=woocommerce)](https://woocommerce.com)
 [![PHP](https://img.shields.io/badge/PHP-8.1+-777bb4.svg?style=for-the-badge&logo=php)](https://php.net)
