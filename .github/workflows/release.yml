@@ -31,23 +31,20 @@ jobs:
       - name: Build Assets
         run: npm run build
 
-      - name: Cleanup for Release
+      - name: Prepare Package
         run: |
-          rm -rf node_modules
-          rm -rf src
-          rm -rf .git
-          rm -rf .github
-          rm -f .gitignore
-          rm -f composer.json
-          rm -f composer.lock
-          rm -f package.json
-          rm -f package-lock.json
-          rm -f tsconfig.json
-          rm -f tsconfig.node.json
-          rm -f vite.config.ts
+          mkdir snappbox-prod
+          cp -r includes snappbox-prod/
+          cp -r assets snappbox-prod/
+          cp -r vendor snappbox-prod/
+          cp snappbox.php snappbox-prod/
+          cp README.md snappbox-prod/
+          cp broadcast.json snappbox-prod/
+          # Ensure assets/dist exists
+          if [ ! -d "snappbox-prod/assets/dist" ]; then echo "Error: Assets not built"; exit 1; fi
 
       - name: Zip Plugin
-        run: zip -r snappbox-elite.zip .
+        run: zip -r snappbox-elite.zip snappbox-prod
 
       - name: Create Release
         uses: marvinpinto/action-automatic-releases@latest
