@@ -44,13 +44,36 @@ class AdminPage {
 	}
 
 	public function register_settings(): void {
-		\register_setting( 'snappbox-settings', 'snappbox_api', array( 'sanitize_callback' => 'sanitize_text_field' ) );
-		\add_settings_section( 'snappbox-main', __( 'General Settings', 'snappbox' ), null, 'snappbox-settings' );
-		\add_settings_field( 'snappbox_api', __( 'API Token', 'snappbox' ), array( $this, 'render_api_field' ), 'snappbox-settings', 'snappbox-main' );
+		$configs = $this->get_settings_config();
+		
+		\add_settings_section( 'snappbox-main', \__( 'General Settings', 'snappbox' ), null, 'snappbox-settings' );
+
+		foreach ( $configs as $id => $config ) {
+			\register_setting( 'snappbox-settings', $id, array( 'sanitize_callback' => $config['sanitize'] ) );
+			\add_settings_field( 
+				$id, 
+				$config['label'], 
+				function() use ($id, $config) { $this->render_field($id, $config); }, 
+				'snappbox-settings', 
+				'snappbox-main' 
+			);
+		}
 	}
 
-	public function render_api_field(): void {
-		$value = \get_option( 'snappbox_api', '' );
-		echo '<input type="text" name="snappbox_api" value="' . \esc_attr( $value ) . '" class="regular-text" />';
+	private function get_settings_config(): array {
+		return array(
+			'snappbox_api' => array(
+				'label'    => \__( 'API Token', 'snappbox' ),
+				'sanitize' => 'sanitize_text_field',
+				'type'     => 'text',
+				'default'  => ''
+			),
+			// AUTO_APPEND_HERE (Reserved for Elite Automation)
+		);
+	}
+
+	private function render_field( string $id, array $config ): void {
+		$value = \get_option( $id, $config['default'] );
+		echo '<input type="' . \esc_attr( $config['type'] ) . '" name="' . \esc_attr( $id ) . '" value="' . \esc_attr( $value ) . '" class="regular-text" />';
 	}
 }

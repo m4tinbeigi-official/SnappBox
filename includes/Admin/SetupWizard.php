@@ -328,80 +328,78 @@ class SetupWizard {
 			$settings = array();
 		}
 
-		switch ( $step ) {
-			case 1: {
-					$api                      = isset( $_POST['api'] ) ? \sanitize_text_field( \wp_unslash( $_POST['api'] ) ) : '';
-					$settings['snappbox_api'] = $api;
-					\update_option( $this->wc_option_key, $settings );
-					$this->snappb_redirect_step( 2 );
-					break;
+		$config = $this->get_wizard_config();
+		if ( ! isset( $config[ $step ] ) ) {
+			$this->snappb_redirect_step( 1 );
+		}
+
+		$settings = \maybe_unserialize( \get_option( $this->wc_option_key, array() ) );
+		if ( ! \is_array( $settings ) ) {
+			$settings = array();
+		}
+
+		foreach ( $config[ $step ]['fields'] as $key => $field ) {
+			$raw_value = isset( $_POST[ $key ] ) ? \wp_unslash( $_POST[ $key ] ) : '';
+			$value     = ( 'number' === $field['type'] ) ? $this->snappb_normalize_number( $raw_value ) : \sanitize_text_field( $raw_value );
+			
+			if ( ! empty( $field['option_key'] ) ) {
+				\update_option( $field['option_key'], $value );
 			}
-
-			case 2: {
-					$lat = $this->snappb_normalize_number( isset( $_POST['lat'] ) ? \sanitize_text_field( \wp_unslash( $_POST['lat'] ) ) : '' );
-					$lng = $this->snappb_normalize_number( isset( $_POST['lng'] ) ? \sanitize_text_field( \wp_unslash( $_POST['lng'] ) ) : '' );
-
-				if ( $lat !== '' && \is_numeric( $lat ) ) {
-					\update_option( 'snappbox_latitude', $lat );
-					$settings['snappbox_latitude'] = $lat;
-				}
-				if ( $lng !== '' && \is_numeric( $lng ) ) {
-					\update_option( 'snappbox_longitude', $lng );
-					$settings['snappbox_longitude'] = $lng;
-				}
-
-					\update_option( $this->wc_option_key, $settings );
-					$this->snappb_redirect_step( 3 );
-				break;
-			}
-
-			case 3: {
-					$store_name   = \sanitize_text_field( isset( $_POST['store_name'] ) ? \wp_unslash( $_POST['store_name'] ) : '' );
-					$store_phone  = \preg_replace( '#[^0-9+\-\s]#', '', isset( $_POST['store_phone'] ) ? \sanitize_text_field( \wp_unslash( $_POST['store_phone'] ) ) : '' );
-					$method_title = isset( $_POST['method_title'] ) ? \sanitize_text_field( \wp_unslash( $_POST['method_title'] ) ) : '';
-					$enabled      = ( isset( $_POST['enabled'] ) && $_POST['enabled'] === 'yes' ) ? 'yes' : 'no';
-
-					$title = ( $method_title === '' ) ? \__( 'SnappBox Shipping', 'snappbox' ) : $method_title;
-
-					\update_option( 'snappbox_store_name', $store_name );
-					\update_option( 'snappbox_store_phone', $store_phone );
-
-					$settings['snappbox_store_name']  = $store_name;
-					$settings['snappbox_store_phone'] = $store_phone;
-					$settings['enabled']              = $enabled;
-					$settings['title']                = $title;
-
-					\update_option( $this->wc_option_key, $settings );
-					$this->snappb_redirect_step( 4 );
-					break;
-			}
-
-			case 4: {
-					$settings['ondelivery'] = ( isset( $_POST['ondelivery'] ) && $_POST['ondelivery'] === 'yes' ) ? 'yes' : 'no';
-
-				foreach ( array( 'free_delivery', 'base_cost' ) as $k ) {
-					if ( isset( $_POST[ $k ] ) ) {
-						$settings[ $k ] = \sanitize_text_field( \wp_unslash( $_POST[ $k ] ) );
-					}
-				}
-
-					\update_option( $this->wc_option_key, $settings );
-
-					\wp_safe_redirect(
-						\add_query_arg(
-							array(
-								'page'    => 'wc-settings',
-								'tab'     => 'shipping',
-								'section' => 'snappbox_shipping_method',
-							),
-							\admin_url( 'admin.php' )
-						)
-					);
-				exit;
+			
+			if ( ! empty( $field['settings_key'] ) ) {
+				$settings[ $field['settings_key'] ] = $value;
 			}
 		}
 
-		$this->snappb_redirect_step( 1 );
+		\update_option( $this->wc_option_key, $settings );
+
+		if ( 4 === $step ) {
+			\wp_safe_redirect(
+				\add_query_arg(
+					array(
+						'page'    => 'wc-settings',
+						'tab'     => 'shipping',
+						'section' => 'snappbox_shipping_method',
+					),
+					\admin_url( 'admin.php' )
+				)
+			);
+			exit;
+		}
+
+		$this->snappb_redirect_step( $step + 1 );
+	}
+
+	private function get_wizard_config(): array {
+		return array(
+			1 => array(
+				'fields' => array(
+					'api' => array( 'type' => 'text', 'settings_key' => 'snappbox_api' )
+				)
+			),
+			2 => array(
+				'fields' => array(
+					'lat' => array( 'type' => 'number', 'option_key' => 'snappbox_latitude', 'settings_key' => 'snappbox_latitude' ),
+					'lng' => array( 'type' => 'number', 'option_key' => 'snappbox_longitude', 'settings_key' => 'snappbox_longitude' )
+				)
+			),
+			3 => array(
+				'fields' => array(
+					'store_name'   => array( 'type' => 'text', 'option_key' => 'snappbox_store_name', 'settings_key' => 'snappbox_store_name' ),
+					'store_phone'  => array( 'type' => 'text', 'option_key' => 'snappbox_store_phone', 'settings_key' => 'snappbox_store_phone' ),
+					'method_title' => array( 'type' => 'text', 'settings_key' => 'title' ),
+					'enabled'      => array( 'type' => 'text', 'settings_key' => 'enabled' )
+				)
+			),
+			4 => array(
+				'fields' => array(
+					'ondelivery'    => array( 'type' => 'text', 'settings_key' => 'ondelivery' ),
+					'free_delivery' => array( 'type' => 'text', 'settings_key' => 'free_delivery' ),
+					'base_cost'     => array( 'type' => 'text', 'settings_key' => 'base_cost' )
+				)
+			),
+			// AUTO_APPEND_STEPS (Reserved for Elite Automation)
+		);
 	}
 
 	/**
