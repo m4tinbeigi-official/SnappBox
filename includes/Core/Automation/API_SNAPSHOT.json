@@ -1,0 +1,10 @@
+{
+    "version": "1.0.0",
+    "endpoints": {
+        "pricing": "/v2/pricing",
+        "wallet": "/v1/user/profile",
+        "create_order": "/v1/order/create",
+        "cancel_order": "/v1/order/cancel"
+    },
+    "last_sync": "2026-02-18T20:30:00Z"
+}
