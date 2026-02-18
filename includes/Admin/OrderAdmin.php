@@ -18,27 +18,16 @@ class OrderAdmin {
 		\add_action( 'wp_ajax_snappb_get_pricing', array( $this, 'handle_get_pricing' ) );
 	}
 
-	public function enqueue_assets(): void {
-		$base_url = \defined( 'SNAPPBOX_URL' ) ? \trailingslashit( SNAPPBOX_URL ) : '';
-		$base_dir = \defined( 'SNAPPBOX_DIR' ) ? \trailingslashit( SNAPPBOX_DIR ) : '';
+	    public function enqueue_assets(): void {
+        \Snappbox\Core\Vite::enqueue('src/admin/admin-snappbox.ts');
 
-		\wp_enqueue_style( 'maplibre-gl', $base_url . 'assets/css/leaflet.css', array(), '1.9.4' );
-		\wp_enqueue_script( 'maplibre-gl', $base_url . 'assets/js/leaflet.js', array(), '1.9.4', true );
-
-		\wp_enqueue_style( 'snappbox-admin', $base_url . 'assets/css/admin-snappbox.css', array(), '1.2.0' );
-		\wp_enqueue_script( 'snappbox-admin', $base_url . 'assets/js/admin-snappbox.js', array( 'jquery', 'maplibre-gl' ), '1.2.0', true );
-
-		\wp_localize_script(
-			'snappbox-admin',
-			'SNAPPBOX_GLOBAL',
-			array(
-				'ajaxUrl'      => \admin_url( 'admin-ajax.php' ),
-				'nonce'        => \wp_create_nonce( 'snappbox_admin_actions' ),
-				'rtlPluginUrl' => $base_url . 'assets/js/mapbox-gl-rtl-text.js',
-				'mapStyleUrl'  => 'https://tile.snappmaps.ir/styles/snapp-style-v4.1.2/style.json',
-			)
-		);
-	}
+        \wp_localize_script('src/admin/admin-snappbox.ts', 'SNAPPBOX_GLOBAL', [
+            'ajaxUrl'      => \admin_url('admin-ajax.php'),
+            'nonce'        => \wp_create_nonce('snappbox_admin_actions'),
+            'rtlPluginUrl' => \trailingslashit(\SNAPPBOX_URL) . 'assets/js/mapbox-gl-rtl-text.js',
+            'mapStyleUrl'  => 'https://tile.snappmaps.ir/styles/snapp-style-v4.1.2/style.json',
+        ]);
+    }
 
 	public function display_order_admin_box( $order ): void {
 		$nonce     = \wp_create_nonce( 'snappbox_admin_actions' );

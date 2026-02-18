@@ -15,12 +15,13 @@ export default defineConfig({
     emptyOutDir: true,
     manifest: true,
     rollupOptions: {
-      input: {
+      input: [
         // Main entry for the Setup Wizard Mini-App
-        'setup-wizard': resolve(__dirname, 'src/setup-wizard/main.tsx'),
+        resolve(__dirname, 'src/setup-wizard/main.tsx'),
+        resolve(__dirname, 'src/admin/admin-snappbox.ts'),
         // Shared global styles
-        'global': resolve(__dirname, 'src/styles/global.css'),
-      },
+        resolve(__dirname, 'src/styles/global.css'),
+      ],
     },
   },
   server: {

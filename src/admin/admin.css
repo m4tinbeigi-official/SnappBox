@@ -1,0 +1,22 @@
+/* SnappBox Elite Admin Styles */
+.snappbox-elite-section {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    margin: 20px 0;
+    border: 1px solid #f1f5f9;
+}
+
+.sb-admin-map {
+    border: 1px solid #e2e8f0;
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+}
+
+.elite-card {
+    transition: transform 0.2s ease;
+}
+
+.elite-card:hover {
+    transform: translateY(-2px);
+}
