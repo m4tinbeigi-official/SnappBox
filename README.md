@@ -60,10 +60,8 @@ For those who want to contribute or build upon this elite foundation:
    npm run dev
    ```
 
-5. **Production Build**
-   ```bash
-   npm run build
-   ```
+6. **Elite Sync (Optional)**
+   - Simply type `push` in the chat to automatically build, lint, update documentation, and push to GitHub.
 
 ---
 

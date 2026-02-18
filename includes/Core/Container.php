@@ -12,30 +12,32 @@ use DI\Container as DIContainer;
  */
 class Container {
 
-    /** @var DIContainer|null */
-    private static $container = null;
+	/** @var DIContainer|null */
+	private static $container = null;
 
-    /**
-     * Get the DI Container instance.
-     */
-    public static function instance(): DIContainer {
-        if (self::$container === null) {
-            $builder = new ContainerBuilder();
-            
-            // Define enterprise-level service mappings
-            $builder->addDefinitions([
-                // Interface to Implementation mappings can go here
-            ]);
+	/**
+	 * Get the DI Container instance.
+	 */
+	public static function instance(): DIContainer {
+		if ( self::$container === null ) {
+			$builder = new ContainerBuilder();
 
-            self::$container = $builder->build();
-        }
-        return self::$container;
-    }
+			// Define enterprise-level service mappings
+			$builder->addDefinitions(
+				array(
+				// Interface to Implementation mappings can go here
+				)
+			);
 
-    /**
-     * Resolve a service from the container.
-     */
-    public static function get(string $name) {
-        return self::instance()->get($name);
-    }
+			self::$container = $builder->build();
+		}
+		return self::$container;
+	}
+
+	/**
+	 * Resolve a service from the container.
+	 */
+	public static function get( string $name ) {
+		return self::instance()->get( $name );
+	}
 }
