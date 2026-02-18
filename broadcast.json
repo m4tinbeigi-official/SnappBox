@@ -1,0 +1,12 @@
+{
+    "active": true,
+    "id": "rebranding_v1",
+    "type": "success",
+    "title": "Welcome to SnappBox Elite v1.2",
+    "content": "We have successfully modernized the entire plugin architecture. Stay tuned for real-time updates and new features delivered directly from our repository.",
+    "image": "https://raw.githubusercontent.com/m4tinbeigi-official/SnappBox/main/assets/img/sb-log.svg",
+    "button": {
+        "text": "View Repository",
+        "url": "https://github.com/m4tinbeigi-official/SnappBox"
+    }
+}

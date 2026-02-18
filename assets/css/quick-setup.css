@@ -1,0 +1,289 @@
+/* Fullscreen overlay with a subtle mesh gradient background */
+#sbqs-root {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    overflow: auto;
+    background: radial-gradient(at 0% 0%, rgba(33, 170, 88, 0.05) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(0, 94, 255, 0.05) 0px, transparent 50%);
+    background-color: #f8fafc;
+    font-family: "IRANSansX", "Inter", system-ui, -apple-system, sans-serif;
+}
+
+/* Container spacing and centering */
+.sbqs-container {
+    width: min(1000px, 94vw);
+    margin: 40px auto;
+    padding: 0 20px 80px;
+}
+
+.sb-logo {
+    width: 200px;
+    margin: 0 auto 40px;
+    text-align: center;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.05));
+    transition: transform 0.3s ease;
+}
+
+.sb-logo:hover {
+    transform: scale(1.05);
+}
+
+/* Modern Stepper */
+.sbqs-stepper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    margin: 0 0 40px;
+    padding: 0;
+    list-style: none;
+}
+
+.sbqs-step {
+    flex: 1;
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+}
+
+.sbqs-title {
+    font-weight: 600;
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: #64748b;
+    transition: color 0.3s ease;
+}
+
+.sbqs-step.active .sbqs-title {
+    color: #0f172a;
+}
+
+.sbqs-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: #fff;
+    border: 2px solid #e2e8f0;
+    text-decoration: none;
+    color: #94a3b8;
+    font-weight: 700;
+    font-size: 14px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.sbqs-step.active .sbqs-dot {
+    border-color: #21aa58;
+    background: #21aa58;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(33, 170, 88, 0.2);
+}
+
+.sbqs-step.current .sbqs-dot {
+    background: #21aa58;
+    border-color: #21aa58;
+    color: #fff;
+    transform: scale(1.1);
+}
+
+/* Stepper Connector Lines */
+.sbqs-step:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 66px;
+    /* Adjusted to align with dots */
+    right: -50%;
+    width: 100%;
+    height: 2px;
+    background: #e2e8f0;
+    z-index: -1;
+    transition: background 0.3s ease;
+}
+
+.sbqs-step.active:not(:last-child)::after {
+    background: #21aa58;
+}
+
+/* Premium Card Design */
+.sbqs-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(226, 232, 240, 1);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.sbqs-lead {
+    font-size: 20px;
+    font-weight: 700;
+    color: #15161a;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.sbqs-field {
+    margin-bottom: 24px;
+}
+
+.sbqs-field label {
+    display: block;
+    font-weight: 600;
+    color: #15161a;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.sbqs-field input[type=text],
+.sbqs-field input[type=number] {
+    width: 100%;
+    height: 52px;
+    padding: 0 16px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    background: #fff;
+    transition: all 0.2s ease;
+    font-size: 16px;
+}
+
+.sbqs-field input:focus {
+    outline: none;
+    border-color: #21aa58;
+    box-shadow: 0 0 0 4px rgba(33, 170, 88, 0.1);
+}
+
+/* Actions & Buttons */
+.sbqs-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.sbqs-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 52px !important;
+    padding: 0 32px !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    border-radius: 12px !important;
+    transition: all 0.2s ease !important;
+    cursor: pointer;
+}
+
+.sbqs-btn.button-primary {
+    background: #21aa58 !important;
+    border: none !important;
+    color: #fff !important;
+    box-shadow: 0 4px 6px -1px rgba(33, 170, 88, 0.2), 0 2px 4px -1px rgba(33, 170, 88, 0.1) !important;
+}
+
+.sbqs-btn.button-primary:hover {
+    background: #1c8c49 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(33, 170, 88, 0.3) !important;
+}
+
+.sbqs-btn.button-secondary {
+    background: #fff !important;
+    border: 1px solid #e2e8f0 !important;
+    color: #15161a !important;
+}
+
+.sbqs-btn.button-secondary:hover {
+    background: #f8fafc !important;
+    border-color: #cbd5e1 !important;
+}
+
+/* Map specific tweaks */
+.sbqs-map-wrap {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    margin-bottom: 24px;
+}
+
+.sbqs-map {
+    height: 480px;
+    margin: 0;
+}
+
+/* Grid Layouts */
+.sbqs-grid,
+.sbqs-two {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+}
+
+.sbqs-check {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.sbqs-check:hover {
+    background: #fff;
+    border-color: #21aa58;
+}
+
+.sbqs-check input[type=checkbox] {
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    border: 2px solid #cbd5e1;
+    cursor: pointer;
+}
+
+/* Accessibility & Utils */
+body.woocommerce_page_snappbox-quick-setup .notice,
+body.woocommerce_page_snappbox-quick-setup #adminmenuback,
+body.woocommerce_page_snappbox-quick-setup #adminmenuwrap,
+body.woocommerce_page_snappbox-quick-setup #wpadminbar {
+    display: none !important;
+}
+
+body.woocommerce_page_snappbox-quick-setup #wpcontent {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+@media (max-width: 640px) {
+    .sbqs-container {
+        margin: 20px auto;
+    }
+
+    .sbqs-card {
+        padding: 24px;
+    }
+
+    .sbqs-stepper {
+        gap: 0;
+    }
+
+    .sbqs-title {
+        display: none;
+    }
+
+    .sbqs-step:not(:last-child)::after {
+        top: 20px;
+    }
+}

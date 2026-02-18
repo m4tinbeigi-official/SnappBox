@@ -1,0 +1,31 @@
+{
+    "name": "snappbox/wp-plugin",
+    "description": "Official SnappBox WooCommerce Delivery Plugin",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "SnappBox Team",
+            "homepage": "https://snapp-box.com"
+        },
+        {
+            "name": "Rick Sanchez",
+            "email": "rick@example.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "php-di/php-di": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Snappbox\\": "includes/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        },
+        "optimize-autoloader": true
+    }
+}

@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+    --color-brand-green: #21aa58;
+    --color-brand-blue: #005eff;
+    --radius-elite: 12px;
+}
+
+@layer base {
+    body {
+        @apply antialiased text-[#15161a] bg-[#fdfdfd];
+    }
+}
+
+@layer components {
+    .elite-card {
+        @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-xl rounded-elite p-8;
+    }
+
+    .elite-button {
+        @apply px-6 py-3 bg-brand-green text-white font-medium rounded-elite transition-all duration-300 hover:shadow-lg hover:brightness-110 active:scale-95;
+    }
+}
