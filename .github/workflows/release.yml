@@ -1,0 +1,60 @@
+name: Build and Release Elite Plugin
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    name: Build and Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+
+      - name: Install Dependencies
+        run: |
+          composer install --no-dev --optimize-autoloader
+          npm install
+
+      - name: Build Assets
+        run: npm run build
+
+      - name: Cleanup for Release
+        run: |
+          rm -rf node_modules
+          rm -rf src
+          rm -rf .git
+          rm -rf .github
+          rm -f .gitignore
+          rm -f composer.json
+          rm -f composer.lock
+          rm -f package.json
+          rm -f package-lock.json
+          rm -f tsconfig.json
+          rm -f tsconfig.node.json
+          rm -f vite.config.ts
+
+      - name: Zip Plugin
+        run: zip -r snappbox-elite.zip .
+
+      - name: Create Release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: false
+          title: "SnappBox Elite - Production Release"
+          files: |
+            snappbox-elite.zip

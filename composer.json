@@ -22,9 +22,18 @@
             "Snappbox\\": "includes/"
         }
     },
+    "require-dev": {
+        "wp-coding-standards/wpcs": "^3.0",
+        "phpstan/phpstan": "^1.10"
+    },
+    "scripts": {
+        "lint": "vendor/bin/phpcs",
+        "analyze": "vendor/bin/phpstan analyze"
+    },
     "config": {
         "allow-plugins": {
-            "composer/installers": true
+            "composer/installers": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
         },
         "optimize-autoloader": true
     }

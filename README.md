@@ -1,37 +1,100 @@
-# SnappBox WooCommerce Delivery
+<p align="center">
+  <img src="assets/img/sb-log.svg" alt="SnappBox Logo" width="200" />
+</p>
 
-Official integration for SnappBox delivery services.
+# SnappBox Elite v1.2.0
+> **The Enterprise-Grade WooCommerce Delivery Integration.**
 
-### Contributors
-*   SnappBox Team (@snappbox)
-*   @samooel
-*   @matinbeigi
-*   Rick Sanchez
+[![PHP Version](https://img.shields.io/badge/PHP-%3E%3D%207.4-777bb4?style=for-the-badge&logo=php)](https://php.net)
+[![WooCommerce](https://img.shields.io/badge/WooCommerce-%3E%3D%207.0-96588a?style=for-the-badge&logo=woocommerce)](https://woocommerce.com)
+[![License](https://img.shields.io/badge/License-GPL%20v2-lightgrey?style=for-the-badge)](LICENSE)
+[![Build System](https://img.shields.io/badge/Build-Vite%20%2B%20React-646cff?style=for-the-badge&logo=vite)](https://vitejs.dev)
 
-### 🚀 Version 1.2.0 - The Professional Transformation
-This major update introduces a complete architectural overhaul and visual standard alignment.
+Welcome to the **SnappBox Elite** repository. This is not just a plugin; it is a high-performance, container-driven engineering masterpiece designed for the modern WordPress ecosystem.
 
-#### 🏗️ Core Architecture
-- **Namespace Standardization**: Migrated the entire codebase to `Snappbox` PSR-4 namespaces.
-- **Bootstrap Layer**: Introduced `Snappbox\Core\App` to handle plugin lifecycle.
-- **Singleton Management**: Ensures only one instance of core components exists.
-- **Professional Autoloader**: Pure PSR-4 compliant class loading.
+---
 
-#### �️ Security & Professionalism
-- **HPOS Compatibility**: Fully compatible with WooCommerce High-Performance Order Storage.
-- **Enhanced Security**: Mandatory nonce and capability checks for all administrative and front-end actions.
-- **Input Sanitization**: 100% coverage on all user-submitted fields.
-- **Composer Integration**: Added `composer.json` for modern dependency management.
+## 🚀 Key Advantages
 
-#### � Visual Standards (SnappBox DNA)
-- **Brand Alignment**: Colors, shadows, and geometry now perfectly match the official SnappBox website.
-- **Wizard Redesign**: Reimagined the Quick Setup Wizard with mesh gradients and glassmorphism.
-- **UX Polish**: Improved transitions, map interactivity, and mobile responsiveness.
+- **💎 Elite Architecture**: Powered by **PHP-DI**, ensuring a decoupled, testable, and scalable codebase.
+- **⚡ Supercharged Frontend**: A lightning-fast **React + TypeScript** admin interface bundled with **Vite**.
+- **🎨 Modern Design**: Utilizing **Tailwind CSS v4** for a premium, high-contrast User Experience.
+- **📡 Remote Broadcast (CMS)**: Manage your community directly from your GitHub repository using our native Remote Broadcast system.
+- **🔒 Security First**: Strict typing (`strict_types=1`), non-ces, and capability checks are baked into every layer.
 
-#### ⚡ Performance
-- **Smart Caching**: Implemented a 1-hour transient cache for expensive API calls (Wallet Balance, Nearby Bikers).
-- **Asset Optimization**: Version controlled CSS/JS assets to prevent browser caching issues after updates.
+---
 
-### Requirements
-*   WooCommerce 7.0+
-*   PHP 7.4+
+## 🏗️ Technical Stack
+
+| Component | Technology | Description |
+| :--- | :--- | :--- |
+| **Core Logic** | PHP 7.4+ | Strict-typed, Container-driven logic |
+| **DI Container** | [PHP-DI](https://php-di.org/) | Enterprise dependency management |
+| **Frontend** | React 18 / TS | Modern, stateful UI development |
+| **Styling** | [Tailwind CSS v4](https://tailwindcss.com/) | Next-gen utility-first styling |
+| **Build Tool** | [Vite 6](https://vitejs.dev/) | Optimized asset bundling & HMR |
+
+---
+
+## 🛠️ Developer Installation
+
+For those who want to contribute or build upon this elite foundation:
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/m4tinbeigi-official/SnappBox.git
+   ```
+
+2. **Install PHP Dependencies**
+   ```bash
+   composer install --optimize-autoloader
+   ```
+
+3. **Install Frontend Dependencies**
+   ```bash
+   npm install
+   ```
+
+4. **Development (HMR)**
+   ```bash
+   npm run dev
+   ```
+
+5. **Production Build**
+   ```bash
+   npm run build
+   ```
+
+---
+
+## 📡 Remote Broadcast Management
+
+You can update the announcements shown in the plugin admin panel by modifying the `broadcast.json` file in this repository.
+
+```json
+{
+  "active": true,
+  "type": "success",
+  "title": "Elite Update Released!",
+  "content": "Explore the new React-based setup wizard now.",
+  "image": "https://...",
+  "button": { "text": "Learn More", "url": "..." }
+}
+```
+
+---
+
+## 🤝 Contribution & Standards
+
+We maintain an enterprise standard. All code must pass:
+- **PHPCS**: WordPress Coding Standards.
+- **PHPStan**: Static Analysis Level 5+.
+- **Prettier**: Consistent frontend formatting.
+
+---
+
+<p align="center">
+  Driven by Excellence • Engineered by Professionals
+  <br />
+  <b>© 2026 SnappBox Team</b>
+</p>

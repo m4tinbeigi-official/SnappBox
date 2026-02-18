@@ -1,0 +1,12 @@
+parameters:
+    level: 5
+    paths:
+        - snappbox.php
+        - includes
+    excludePaths:
+        - vendor/*
+    bootstrapFiles:
+        - vendor/autoload.php
+    ignoreErrors:
+        - '#Function [\w\\]+ not found.#'
+        - '#Constant [\w\\]+ not found.#'

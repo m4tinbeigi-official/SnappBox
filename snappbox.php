@@ -17,3 +17,7 @@ if (file_exists(SNAPPBOX_DIR . 'vendor/autoload.php')) {
 
 // Global hook to boot the enterprise application
 \add_action('plugins_loaded', [\Snappbox\Core\App::class, 'init']);
+
+// Activation / Deactivation
+\register_activation_hook(__FILE__, [\Snappbox\Core\Activator::class, 'activate']);
+\register_deactivation_hook(__FILE__, [\Snappbox\Core\Activator::class, 'deactivate']);

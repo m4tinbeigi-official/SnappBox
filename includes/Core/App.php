@@ -17,8 +17,14 @@ class App {
             // Boot Core Services via Container
             $services = [
                 \Snappbox\Admin\SetupWizard::class,
+                \Snappbox\Admin\DashboardWidget::class,
+                \Snappbox\Admin\OrderAdmin::class,
+                \Snappbox\Admin\AdminPage::class,
                 \Snappbox\WooCommerce\ShippingMethod::class,
+                \Snappbox\WooCommerce\OrderColumn::class,
+                \Snappbox\WooCommerce\PaymentGateway::class,
                 \Snappbox\Frontend\CheckoutMap::class,
+                \Snappbox\Frontend\ScheduleModal::class,
                 \Snappbox\API\Broadcast::class,
             ];
 
