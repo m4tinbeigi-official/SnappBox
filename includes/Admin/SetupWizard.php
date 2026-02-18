@@ -145,19 +145,8 @@ class SetupWizard {
 			<div class="sbqs-actions">
 				<?php if ( $step > 1 ) : ?>
 					<a class="button button-secondary sbqs-btn"
-						href="<?php echo esc_url( $this->snappb_url_for_step( $step - 1 ) ); ?>">
-						<?php echo esc_html_x( 'Back', 'Button', 'snappbox' ); ?>
-					</a>
-				<?php endif; ?>
-
-				<button
-					type="submit"
-		?>
-			<div class="sbqs-actions">
-				<?php if ( $step > 1 ) : ?>
-					<a class="button button-secondary sbqs-btn"
-						href="<?php echo esc_url( $this->snappb_url_for_step( $step - 1 ) ); ?>">
-						<?php echo esc_html_x( 'Back', 'Button', 'snappbox' ); ?>
+						href="<?php echo \esc_url( $this->snappb_url_for_step( $step - 1 ) ); ?>">
+						<?php echo \esc_html_x( 'Back', 'Button', 'snappbox' ); ?>
 					</a>
 				<?php endif; ?>
 
@@ -165,7 +154,7 @@ class SetupWizard {
 					type="submit"
 					class="button button-primary sbqs-btn"
 					<?php
-					if ( $step == 2 ) {
+					if ( 2 === $step ) {
 						?>
 						disabled="disabled" <?php } ?>
 					<?php
@@ -183,6 +172,8 @@ class SetupWizard {
 					<?php
 					if ( $is_last ) {
 						?>
+						onclick="ym(105087875,'reachGoal',' step-4'); setTimeout(() => { this.form.submit(); }, 150); return false;" <?php } ?>>
+					<?php echo \esc_html( $is_last ? \_x( 'Finish', 'Button', 'snappbox' ) : \_x( 'Save & Continue', 'Button', 'snappbox' ) ); ?>
 				</button>
 			</div>
 		</form>
